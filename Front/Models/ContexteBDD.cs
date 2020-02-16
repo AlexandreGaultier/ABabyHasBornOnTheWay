@@ -8,11 +8,11 @@ namespace Front.Models
 {
     public class ContexteBDD : DbContext
     {
-        public ContexteBDD()
-            : base("DbContext")
-        {
+        //public ContexteBDD()
+        //    : base("DbContext")
+        //{
 
-        }
+        //}
 
         public DbSet<Post> Posts{ get; set; }
         public DbSet<Promo> Promos { get; set; }

@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Inscription";
+}
+
+<h2>Inscription</h2>
+<form action="@Html.ActionLink("Accueil", "AjoutUtilisateur", "Home")">
+    <p>Nom :</p>
+    <input required type="text" name="nom" placeholder=" Fairronierre " />
+    <p>Prénom :</p>
+    <input required type="text" name="prenom" placeholder=" Allan " />
+    <p>Email :</p>
+    <input required type="text" name="email" placeholder=" Alan.Fairronierre@potit.chat " />
+    <p>Mot de passe :</p>
+    <input required type="password" name="mdp" />
+    <p>Promo :</p>
+    <input type="text" name="promo_id" placeholder="B1/B2/B3/I4/I5" />
+    @*<input type="radio" id="B1" name="promo_id" value="B1" /><label for="B1">B1</label>
+        <input type="radio" id="B2" name="promo_id" value="B2" /><label for="B2">B2</label>
+        <input type="radio" id="B3" name="promo_id" value="B3" /><label for="B3">B3</label>
+        <input type="radio" id="I4" name="promo_id" value="I4" /><label for="I4">I4</label>
+        <input type="radio" id="I5" name="promo_id" value="I5" /><label for="I5">I5</label>*@
+
+    <input type="submit" value="Soumettre">
+</form>
+<p><a class="btn btn-primary btn-lg" href="/Home/Login">Se connecter &raquo;</a></p>

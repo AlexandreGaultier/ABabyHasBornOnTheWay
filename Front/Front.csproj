@@ -139,6 +139,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ContexteBDD.cs" />
+    <Compile Include="Models\Dal.cs" />
+    <Compile Include="Models\IDal.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Promo.cs" />
     <Compile Include="Models\Utilisateur.cs" />
@@ -178,9 +180,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Creer.cshtml" />
-    <Content Include="Views\Home\Lister.cshtml" />
+    <Content Include="Views\Home\CreerPost.cshtml" />
+    <Content Include="Views\Home\ListerPost.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Inscription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
