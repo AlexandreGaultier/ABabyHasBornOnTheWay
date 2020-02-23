@@ -19,7 +19,7 @@ namespace Front.Models
         public int AjouterUtilisateur(string nom, string prenom, string email, string mdp, Promo promo_id)
         {
             //string motDePasseEncode = EncodeMD5(mdp); to-do : Chercher pour ENcodeMD5
-            Utilisateur utilisateur = new Utilisateur { Nom = nom, Prenom  =prenom, Email = email, MotDePasse = mdp, Promo_ID = promo_id };
+            Utilisateur utilisateur = new Utilisateur { Nom = nom, Prenom = prenom, Email = email, MotDePasse = mdp, Promo_ID = promo_id };
             bdd.Utilisateurs.Add(utilisateur);
             bdd.SaveChanges();
             return utilisateur.ID;

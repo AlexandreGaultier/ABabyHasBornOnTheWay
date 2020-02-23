@@ -1,7 +1,13 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Login";
 }
+
+@using (Html.BeginForm("Authentification", "Home", FormMethod.Post, new { @class = "form" }))
+{
+
+
+@Html.ValidationSummary(true);
+@Html.AntiForgeryToken();
 
 <h2>Login</h2>
 <form action="@Html.ActionLink("Accueil", "Authentification", "Home")">
@@ -10,6 +16,7 @@
     <p>Mot de passe :</p>
     <input type="password" name="mdp" />
 
-    <input type="submit" value="Soumettre">
+    <input class="btn btn-primary btn-lg" type="submit" value="Soumettre">
 </form>
-<p><a class="btn btn-primary btn-lg" href="/Home/Inscription">S'inscrire &raquo;</a></p>
+<p><a href="/Home/Inscription">S'inscrire &raquo;</a></p>
+}

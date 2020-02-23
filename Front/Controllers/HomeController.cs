@@ -70,8 +70,8 @@ namespace Front.Controllers
             using (IDal dal = new Dal())
             {
                 try {
-                    dal.Authentifier(nom, mdp);
-                    Session["userId"] = dal.Authentifier(nom, mdp);
+                    Utilisateur user =  dal.Authentifier(nom, mdp);
+                    ViewBag.User = user;
                     return View("~/Views/Home/Index.cshtml");
                 } catch (IOException e) {
                     Console.WriteLine($"Error : '{e}'");
