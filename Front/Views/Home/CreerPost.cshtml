@@ -1,9 +1,17 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "CreePost";
 }
-<h2>Entrer une Justification</h2>
-<form action="@Html.ActionLink("Accueil", "AjoutPost", "Home")">
-    <input type="text" name="Texte" placeholder=" ex: Mon chat est mort... " />
 
-    <input type="submit" value="Soumettre">
-</form>
+@using (Html.BeginForm("AjoutPost", "Home", FormMethod.Post, new { @class = "form" }))
+{
+
+    @Html.ValidationSummary(true);
+    @Html.AntiForgeryToken();
+
+    <h2>Entrer une Justification</h2>
+    <form action="@Html.ActionLink("Accueil", "AjoutPost", "Home")">
+        <input required type="text" name="texte" placeholder=" ex: Mon chat est mort... " />
+
+        <input type="submit" value="Soumettre">
+    </form>
+}

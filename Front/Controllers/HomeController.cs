@@ -13,7 +13,7 @@ namespace Front.Controllers
 
         public ActionResult Index()
         {
-            if(Session["userId"] == null) {
+            if(Session["user"] == null) {
                 return View("~/Views/Home/Login.cshtml");
             } else {
                 return View();
@@ -32,34 +32,38 @@ namespace Front.Controllers
 
         public ActionResult CreerPost()
         {
-            return View();
+            if (Session["user"] == null) {
+                return View("~/Views/Home/Login.cshtml");
+            } else {
+                return View();
+            }
         }
 
         public ActionResult ListerPost()
         {
-            try {
-
-            } catch (IOException e) {
-                Console.WriteLine($"Error : '{e}'");
-            }
             using (IDal dal = new Dal()) {
-                List<Post> posts = dal.ObtientTousLesPosts();
-                return View("~/Views/Home/ListerPost.cshtml", posts);
+                try {
+                        List<Post> posts = dal.ObtientTousLesPosts();
+                        return View("~/Views/Home/ListerPost.cshtml", posts);
+                } catch (IOException e) {
+                    Console.WriteLine($"Error : '{e}'");
+                    return View("~/Views/Home/ListerPost.cshtml");
+                } 
             }
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult AjoutUtilisateur(string nom, string prenom, string email, string mdp, Promo promo_id)
-        {
-            using (IDal dal = new Dal())
-            {
-                try {
-                    dal.AjouterUtilisateur(nom, prenom, email, mdp, promo_id);
-                    return View("~/Views/Home/Login.cshtml");
-                }catch (IOException e)
-                {
-                    Console.WriteLine($"Error : '{e}'");
-                }
+        public ActionResult AjoutUtilisateur(string nom, string prenom, string email, string mdp, int INTpromo_id) {
+            using (IDal dal = new Dal()) {
+                    try {
+                    using (var context = new ContexteBDD()) {
+                        Promo promo_id = context.Promos.First(p => p.ID == INTpromo_id);
+                        dal.AjouterUtilisateur(nom, prenom, email, mdp, promo_id);
+                        return View("~/Views/Home/Login.cshtml");
+                    }
+                    } catch (IOException e) {
+                        Console.WriteLine($"Error : '{e}'");
+                    }
                     return View("~/Views/Home/Inscription.cshtml");
             }
         }
@@ -71,7 +75,12 @@ namespace Front.Controllers
             {
                 try {
                     Utilisateur user =  dal.Authentifier(nom, mdp);
-                    ViewBag.User = user;
+                    using (var context = new ContexteBDD())
+                    {
+                        user = context.Utilisateurs.First(u => u.Nom == nom && u.MotDePasse == mdp);
+                        ViewBag.user = user;
+                        Session["user"] = user;
+                    }
                     return View("~/Views/Home/Index.cshtml");
                 } catch (IOException e) {
                     Console.WriteLine($"Error : '{e}'");
@@ -80,16 +89,17 @@ namespace Front.Controllers
             }
         }
 
-        string dateNow = DateTime.Today.ToString("yyyy-MM-dd H:mm:ss");
-
         [HttpPost, ValidateInput(false)]
-        public ActionResult AjoutPost(string texte, Utilisateur utilisateur_id, DateTime dateNow, int likes, int dislikes)
+        public ActionResult AjoutPost(string texte)
         {
             using (IDal dal = new Dal())
             {
                 try {
-                    Utilisateur user_id = (Utilisateur)Session["userId"];
-                    utilisateur_id = user_id;
+                    Utilisateur utilisateur_id = (Utilisateur)Session["user"];
+                    DateTime dateNow = DateTime.Now;
+                    int likes = 0;
+                    int dislikes = 0;
+                    
                     dal.CreerPost(texte, utilisateur_id, dateNow, likes, dislikes);
                     return View("~/Views/Home/ListerPost.cshtml");
                 }  catch (IOException e) {
