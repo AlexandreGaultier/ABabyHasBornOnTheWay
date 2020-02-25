@@ -4,3 +4,18 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
+@*<h2>@ViewBag.Texte</h2>
+    <h3>@ViewBag.utilisateur_id.Prenom @ViewBag.utilisateur_id.Nom</h3>
+    <h4>>@ViewBag.dateNow</h4>
+    <h4>>@ViewBag.likes</h4><h4>>@ViewBag.dislikes</h4>*@
+
+@for (var i = 0; i <= 4; i++)
+{
+<div class="panel-group">
+    <p>@ViewBag.posts[@i].Texte</p>
+    <p>Le : @ViewBag.posts[@i].Date</p>
+    <p>Likes : @ViewBag.posts[@i].Likes</p>
+    <p>Dislikes : @ViewBag.posts[@i].Dislikes</p>
+    <hr />
+</div>
+}

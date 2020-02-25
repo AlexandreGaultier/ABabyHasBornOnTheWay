@@ -45,6 +45,7 @@ namespace Front.Controllers
             using (IDal dal = new Dal()) {
                 try {
                         List<Post> posts = dal.ObtientTousLesPosts();
+                    ViewBag.posts = posts;
                         return View("~/Views/Home/ListerPost.cshtml", posts);
                 } catch (IOException e) {
                     Console.WriteLine($"Error : '{e}'");
@@ -105,6 +106,11 @@ namespace Front.Controllers
                     int likes = 0;
                     int dislikes = 0;
                     dal.CreerPost(texte, utilisateur_id, dateNow, likes, dislikes);
+                    ViewBag.texte = texte;
+                    ViewBag.utilisateur_id = utilisateur_id;
+                    ViewBag.dateNow = dateNow;
+                    ViewBag.likes = likes;
+                    ViewBag.dislikes = dislikes;
                     }
                     return View("~/Views/Home/ListerPost.cshtml");
 
