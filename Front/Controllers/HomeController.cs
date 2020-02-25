@@ -107,18 +107,77 @@ namespace Front.Controllers
                     //On récupère tout les posts en base + l'utilisateur pour les afficher
                     using (var context = new ContexteBDD())
                     {
-                        var temp_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B3");
-                        IQueryable<Post> posts = temp_posts;
-                        List<Post> postsTD = new List<Post>(); //liste à afficher
-                    foreach (Post post in posts) //On va rentrer dans chaque post ll'utilisateur et la promo
-                    {
-                        Post postTD = post;
-                        Utilisateur utilisateurTD = post.Utilisateur_ID;
-                        Promo promoTD = utilisateurTD.Promo_ID;
-                        postTD.Utilisateur_ID = utilisateurTD;
-                        postsTD.Add(postTD);
-                    }
-                    ViewBag.postsTD = postsTD;
+                        var b1_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B1")/*.OrderBy(p => p.Likes)*/;
+                        IQueryable<Post> postsb1 = b1_posts;
+                        
+                        List<Post> postsTDb1 = new List<Post>(); //liste à afficher
+                        foreach (Post post in postsb1) //On va rentrer dans chaque post ll'utilisateur et la promo
+                        {
+                            Post postTD = post;
+                            Utilisateur utilisateurTD = post.Utilisateur_ID;
+                            Promo promoTD = utilisateurTD.Promo_ID;
+                            postTD.Utilisateur_ID = utilisateurTD;
+                            postsTDb1.Add(postTD);
+                        }
+                        ViewBag.postsTDB1 = postsTDb1;
+
+                        var b2_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B2");
+                        IQueryable<Post> postsb2 = b2_posts;
+
+                        List<Post> postsTDb2 = new List<Post>(); //liste à afficher
+                        foreach (Post post in postsb2) //On va rentrer dans chaque post ll'utilisateur et la promo
+                        {
+                            Post postTD = post;
+                            Utilisateur utilisateurTD = post.Utilisateur_ID;
+                            Promo promoTD = utilisateurTD.Promo_ID;
+                            postTD.Utilisateur_ID = utilisateurTD;
+                            postsTDb2.Add(postTD);
+                        }
+                        ViewBag.postsTDB2 = postsTDb2;
+
+                        var b3_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B3");
+                        IQueryable<Post> postsb3 = b3_posts;
+
+                        List<Post> postsTDb3 = new List<Post>(); //liste à afficher
+                        foreach (Post post in postsb3) //On va rentrer dans chaque post ll'utilisateur et la promo
+                        {
+                            Post postTD = post;
+                            Utilisateur utilisateurTD = post.Utilisateur_ID;
+                            Promo promoTD = utilisateurTD.Promo_ID;
+                            postTD.Utilisateur_ID = utilisateurTD;
+                            postsTDb3.Add(postTD);
+                        }
+                        ViewBag.postsTDB3 = postsTDb3;
+
+                        var i4_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "I4");
+                        IQueryable<Post> postsi4 = i4_posts;
+
+                        List<Post> postsTDi4 = new List<Post>(); //liste à afficher
+                        foreach (Post post in postsi4) //On va rentrer dans chaque post ll'utilisateur et la promo
+                        {
+                            Post postTD = post;
+                            Utilisateur utilisateurTD = post.Utilisateur_ID;
+                            Promo promoTD = utilisateurTD.Promo_ID;
+                            postTD.Utilisateur_ID = utilisateurTD;
+                            postsTDi4.Add(postTD);
+                        }
+                        ViewBag.postsTDI4 = postsTDi4;
+
+                        var i5_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "I5");
+                        IQueryable<Post> postsi5 = i5_posts;
+
+                        List<Post> postsTDi5 = new List<Post>(); //liste à afficher
+                        foreach (Post post in postsi5) //On va rentrer dans chaque post ll'utilisateur et la promo
+                        {
+                            Post postTD = post;
+                            Utilisateur utilisateurTD = post.Utilisateur_ID;
+                            Promo promoTD = utilisateurTD.Promo_ID;
+                            postTD.Utilisateur_ID = utilisateurTD;
+                            postsTDi5.Add(postTD);
+                        }
+                        ViewBag.postsTDI5 = postsTDi5;
+
+
                     }
                     return View("~/Views/Home/ListerPostPromo.cshtml");
                 }
@@ -168,7 +227,7 @@ namespace Front.Controllers
                     ViewBag.likes = likes;
                     ViewBag.dislikes = dislikes;
                     }
-                    return View("~/Views/Home/ListerPost.cshtml");
+                    return View("~/Views/Home/Index.cshtml");
 
                 }  catch (IOException e) {
                     Console.WriteLine($"Error : '{e}'");
