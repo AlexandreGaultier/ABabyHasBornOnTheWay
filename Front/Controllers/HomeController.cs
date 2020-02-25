@@ -14,6 +14,7 @@ namespace Front.Controllers
 
         public ActionResult Index()
         {
+            // L'utilisateur doit être connecté pour acccéder aux pages
             if(Session["user"] == null) {
                 return View("~/Views/Home/Login.cshtml");
             } else {
@@ -40,13 +41,45 @@ namespace Front.Controllers
             }
         }
 
+        //Depuis le form d'authentification, on vient authentifier un user, et le stocker en session.
+        [HttpPost, ValidateInput(false)]
+        public ActionResult Authentification(string nom, string mdp)
+        {
+            using (IDal dal = new Dal())
+            {
+                try
+                {
+                    Utilisateur user = dal.Authentifier(nom, mdp);
+                    using (var context = new ContexteBDD())
+                    {
+                        user = context.Utilisateurs.First(u => u.Nom == nom && u.MotDePasse == mdp);
+                        ViewBag.user = user;
+                        int temp = (int)user.ID;
+                        Session["user"] = temp;
+                        utilisateur_co_ID = (int)user.ID;
+                    }
+                    return View("~/Views/Home/Index.cshtml");
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine($"Error : '{e}'");
+                }
+                return View("~/Views/Home/Login.cshtml");
+            }
+        }
+
         public ActionResult ListerPost()
         {
             using (IDal dal = new Dal()) {
                 try {
-                        List<Post> posts = dal.ObtientTousLesPosts();
+                    //On récupère tout les posts en base + l'utilisateur pour les afficher
+                    List<Post> posts = dal.ObtientTousLesPosts();
                     ViewBag.posts = posts;
-                        return View("~/Views/Home/ListerPost.cshtml", posts);
+                    Utilisateur auteur = dal.ObtenirUtilisateur((int)Session["user"]); //posts ne retrouve pas l'utilisateur lors de l'affichage
+                    ViewBag.Utilisateur = auteur;
+                    Promo promo = auteur.Promo_ID;
+                    ViewBag.Promo = promo;
+                    return View("~/Views/Home/ListerPost.cshtml", posts);
                 } catch (IOException e) {
                     Console.WriteLine($"Error : '{e}'");
                     return View("~/Views/Home/ListerPost.cshtml");
@@ -54,6 +87,7 @@ namespace Front.Controllers
             }
         }
 
+        //Depuis le form d'inscription, on vient créer un user
         [HttpPost, ValidateInput(false)]
         public ActionResult AjoutUtilisateur(string nom, string prenom, string email, string mdp, int INTpromo_id) {
             using (IDal dal = new Dal()) {
@@ -70,29 +104,8 @@ namespace Front.Controllers
             }
         }
 
-        [HttpPost, ValidateInput(false)]
-        public ActionResult Authentification(string nom, string mdp)
-        {
-            using (IDal dal = new Dal())
-            {
-                try {
-                    Utilisateur user =  dal.Authentifier(nom, mdp);
-                    using (var context = new ContexteBDD())
-                    {
-                        user = context.Utilisateurs.First(u => u.Nom == nom && u.MotDePasse == mdp);
-                        ViewBag.user = user;
-                        int temp = (int)user.ID;
-                        Session["user"] = temp;
-                        utilisateur_co_ID = (int)user.ID;
-                    }
-                    return View("~/Views/Home/Index.cshtml");
-                } catch (IOException e) {
-                    Console.WriteLine($"Error : '{e}'");
-                }
-                    return View("~/Views/Home/Login.cshtml");
-            }
-        }
 
+        //Depuis le form "justifier un retard", on vient créer un post et return sur la view pour voirs tout les justificatiifs.
         [HttpPost, ValidateInput(false)]
         public ActionResult AjoutPost(string texte)
         {

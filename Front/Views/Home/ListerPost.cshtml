@@ -9,13 +9,13 @@
     <h4>>@ViewBag.dateNow</h4>
     <h4>>@ViewBag.likes</h4><h4>>@ViewBag.dislikes</h4>*@
 
-@for (var i = 0; i <= 4; i++)
+@for (var i = 0; i <= 5; i++)
 {
 <div class="panel-group">
     <p>@ViewBag.posts[@i].Texte</p>
+    <p>@ViewBag.Utilisateur.Nom @ViewBag.Utilisateur.Prenom, @ViewBag.Promo.Libelle</p>
     <p>Le : @ViewBag.posts[@i].Date</p>
-    <p>Likes : @ViewBag.posts[@i].Likes</p>
-    <p>Dislikes : @ViewBag.posts[@i].Dislikes</p>
+    <p>Likes : @ViewBag.posts[@i].Likes | Dislikes : @ViewBag.posts[@i].Dislikes</p>
     <hr />
 </div>
 }

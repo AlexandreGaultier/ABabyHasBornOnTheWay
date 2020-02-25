@@ -14,6 +14,7 @@ namespace Front.Models
         int AjouterUtilisateur(string nom, string prenom, string email, string mdp, Promo promo_id);
         Utilisateur Authentifier(string nom, string mdp);
         Utilisateur ObtenirUtilisateur(int id);
+        Promo ObtenirPromo(int id);
         Utilisateur ObtenirUtilisateur(string idStr);
         int ObtenirUtilisateurID(string nom, string mdp);
 

@@ -42,6 +42,11 @@ namespace Front.Models
             return bdd.Utilisateurs.FirstOrDefault(u => u.ID == id);
         }
 
+        public Promo ObtenirPromo(int id)
+        {
+            return bdd.Promos.FirstOrDefault(p => p.ID == id);
+        }
+
         public Utilisateur ObtenirUtilisateur(string idStr)
         {
             int id;
