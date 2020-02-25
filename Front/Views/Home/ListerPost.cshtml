@@ -12,8 +12,8 @@
 @for (var i = 0; i <= 5; i++)
 {
 <div class="panel-group">
-    <p>@ViewBag.posts[@i].Texte</p>
-    <p>@ViewBag.Utilisateur.Nom @ViewBag.Utilisateur.Prenom, @ViewBag.Promo.Libelle</p>
+    <h4>"@ViewBag.posts[@i].Texte"</h4>
+    <h5>@ViewBag.Utilisateur.Nom @ViewBag.Utilisateur.Prenom, @ViewBag.Promo.Libelle</h5>
     <p>Le : @ViewBag.posts[@i].Date</p>
     <p>Likes : @ViewBag.posts[@i].Likes | Dislikes : @ViewBag.posts[@i].Dislikes</p>
     <hr />
