@@ -105,8 +105,11 @@ namespace Front.Controllers
                 try
                 {
                     //On récupère tout les posts en base + l'utilisateur pour les afficher
-                    List<Post> posts = dal.ObtientTousLesPosts();
-                    List<Post> postsTD = new List<Post>(); //liste à afficher
+                    using (var context = new ContexteBDD())
+                    {
+                        var temp_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B3");
+                        IQueryable<Post> posts = temp_posts;
+                        List<Post> postsTD = new List<Post>(); //liste à afficher
                     foreach (Post post in posts) //On va rentrer dans chaque post ll'utilisateur et la promo
                     {
                         Post postTD = post;
@@ -116,7 +119,8 @@ namespace Front.Controllers
                         postsTD.Add(postTD);
                     }
                     ViewBag.postsTD = postsTD;
-                    return View("~/Views/Home/ListerPostPromo.cshtml", posts);
+                    }
+                    return View("~/Views/Home/ListerPostPromo.cshtml");
                 }
                 catch (IOException e)
                 {
