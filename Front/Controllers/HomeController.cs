@@ -10,6 +10,7 @@ namespace Front.Controllers
 {
     public class HomeController : Controller
     {
+        public int utilisateur_co_ID;
 
         public ActionResult Index()
         {
@@ -79,7 +80,9 @@ namespace Front.Controllers
                     {
                         user = context.Utilisateurs.First(u => u.Nom == nom && u.MotDePasse == mdp);
                         ViewBag.user = user;
-                        Session["user"] = user;
+                        int temp = (int)user.ID;
+                        Session["user"] = temp;
+                        utilisateur_co_ID = (int)user.ID;
                     }
                     return View("~/Views/Home/Index.cshtml");
                 } catch (IOException e) {
@@ -95,13 +98,16 @@ namespace Front.Controllers
             using (IDal dal = new Dal())
             {
                 try {
-                    Utilisateur utilisateur_id = (Utilisateur)Session["user"];
+                    using (var context = new ContexteBDD())
+                    {
+                    Utilisateur utilisateur_id = dal.ObtenirUtilisateur((int)Session["user"]);
                     DateTime dateNow = DateTime.Now;
                     int likes = 0;
                     int dislikes = 0;
-                    
                     dal.CreerPost(texte, utilisateur_id, dateNow, likes, dislikes);
+                    }
                     return View("~/Views/Home/ListerPost.cshtml");
+
                 }  catch (IOException e) {
                     Console.WriteLine($"Error : '{e}'");
                 }

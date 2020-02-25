@@ -60,9 +60,20 @@ namespace Front.Models
         /* Partie POST */
         #region POST
 
+        //public int AjouterUtilisateur(string nom, string prenom, string email, string mdp, Promo promo_id)
+        //{
+        //    //string motDePasseEncode = EncodeMD5(mdp); to-do : Chercher pour ENcodeMD5
+        //    Utilisateur utilisateur = new Utilisateur { Nom = nom, Prenom = prenom, Email = email, MotDePasse = mdp, Promo_ID = promo_id };
+        //    bdd.Utilisateurs.Add(utilisateur);
+        //    bdd.SaveChanges();
+        //    return utilisateur.ID;
+        //}
+
+
         public void CreerPost(string texte, Utilisateur utilisateur_id, DateTime date, int likes, int dislikes)
         {
-            bdd.Posts.Add(new Post { Texte = texte, Utilisateur_ID = utilisateur_id, Date = date, Likes = likes, Dislikes = dislikes });
+            Post post = new Post { Texte = texte, Utilisateur_ID = utilisateur_id, Date = date, Likes = likes, Dislikes = dislikes };
+            bdd.Posts.Add(post);
             bdd.SaveChanges();
         }
 
