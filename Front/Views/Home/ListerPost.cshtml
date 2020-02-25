@@ -9,13 +9,36 @@
     <h4>>@ViewBag.dateNow</h4>
     <h4>>@ViewBag.likes</h4><h4>>@ViewBag.dislikes</h4>*@
 
+@*@foreach (post in @ViewBag.posts)
+    {
+        <div class="panel-group col-lg-3">
+            <h4>"@ViewBag.posts.Texte"</h4>
+            <h5>@ViewBag.Utilisateur.Nom @ViewBag.Utilisateur.Prenom, @ViewBag.Promo.Libelle</h5>
+            <p>Le : @ViewBag.posts.Date</p>
+            <p>Likes : @ViewBag.posts.Likes | Dislikes : @ViewBag.posts.Dislikes</p>
+            <hr />
+        </div>
+    }*@
+
 @for (var i = 0; i <= 5; i++)
 {
-<div class="panel-group">
-    <h4>"@ViewBag.posts[@i].Texte"</h4>
-    <h5>@ViewBag.Utilisateur.Nom @ViewBag.Utilisateur.Prenom, @ViewBag.Promo.Libelle</h5>
-    <p>Le : @ViewBag.posts[@i].Date</p>
-    <p>Likes : @ViewBag.posts[@i].Likes | Dislikes : @ViewBag.posts[@i].Dislikes</p>
-    <hr />
-</div>
+
+    <div class="panel-group col-lg-3">
+        <h4>"@ViewBag.postsTD[@i].Texte"</h4>
+        <h5>@ViewBag.postsTD[@i].Utilisateur_ID.Nom @ViewBag.postsTD[@i].Utilisateur_ID.Prenom, @ViewBag.postsTD[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
+        <p>Le : @ViewBag.postsTD[@i].Date</p>
+        <p>Likes : @ViewBag.postsTD[@i].Likes | Dislikes : @ViewBag.postsTD[@i].Dislikes</p>
+        <hr />
+    </div>
 }
+
+@*@foreach (var post in @ViewBag.posts)
+{
+    <div class="panel-group col-lg-3">
+        <h4>"@ViewBag.post.Texte"</h4>
+        <h5>@ViewBag.post.Utilisateur_ID, @ViewBag.post.Promo_ID</h5>
+        <p>Le : @ViewBag.post.Date</p>
+        <p>Likes : @ViewBag.post.Likes | Dislikes : @ViewBag.post.Dislikes</p>
+        <hr />
+    </div>
+}*@

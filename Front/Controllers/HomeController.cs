@@ -74,16 +74,55 @@ namespace Front.Controllers
                 try {
                     //On récupère tout les posts en base + l'utilisateur pour les afficher
                     List<Post> posts = dal.ObtientTousLesPosts();
-                    ViewBag.posts = posts;
-                    Utilisateur auteur = dal.ObtenirUtilisateur((int)Session["user"]); //posts ne retrouve pas l'utilisateur lors de l'affichage
-                    ViewBag.Utilisateur = auteur;
-                    Promo promo = auteur.Promo_ID;
-                    ViewBag.Promo = promo;
+                    //ViewBag.posts = posts;
+                    //Utilisateur auteur = dal.ObtenirUtilisateur((int)Session["user"]); //posts ne retrouve pas l'utilisateur lors de l'affichage
+                    //ViewBag.Utilisateur = auteur;
+                    //Promo promo = auteur.Promo_ID;
+                    //ViewBag.Promo = promo;
+
+                    List<Post> postsTD = new List<Post>();
+                    foreach ( Post post in posts)
+                    {
+                        Post postTD = post;
+                        Utilisateur utilisateurTD = post.Utilisateur_ID;
+                        Promo promoTD = utilisateurTD.Promo_ID;
+                        postTD.Utilisateur_ID = utilisateurTD;
+                        postsTD.Add(postTD);
+                    }
+                    ViewBag.postsTD = postsTD;
                     return View("~/Views/Home/ListerPost.cshtml", posts);
                 } catch (IOException e) {
                     Console.WriteLine($"Error : '{e}'");
                     return View("~/Views/Home/ListerPost.cshtml");
                 } 
+            }
+        }
+
+        public ActionResult ListerPostPromo()
+        {
+            using (IDal dal = new Dal())
+            {
+                try
+                {
+                    //On récupère tout les posts en base + l'utilisateur pour les afficher
+                    List<Post> posts = dal.ObtientTousLesPosts();
+                    List<Post> postsTD = new List<Post>(); //liste à afficher
+                    foreach (Post post in posts) //On va rentrer dans chaque post ll'utilisateur et la promo
+                    {
+                        Post postTD = post;
+                        Utilisateur utilisateurTD = post.Utilisateur_ID;
+                        Promo promoTD = utilisateurTD.Promo_ID;
+                        postTD.Utilisateur_ID = utilisateurTD;
+                        postsTD.Add(postTD);
+                    }
+                    ViewBag.postsTD = postsTD;
+                    return View("~/Views/Home/ListerPostPromo.cshtml", posts);
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine($"Error : '{e}'");
+                    return View("~/Views/Home/ListerPost.cshtml");
+                }
             }
         }
 
