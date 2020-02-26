@@ -74,12 +74,6 @@ namespace Front.Controllers
                 try {
                     //On récupère tout les posts en base + l'utilisateur pour les afficher
                     List<Post> posts = dal.ObtientTousLesPosts();
-                    //ViewBag.posts = posts;
-                    //Utilisateur auteur = dal.ObtenirUtilisateur((int)Session["user"]); //posts ne retrouve pas l'utilisateur lors de l'affichage
-                    //ViewBag.Utilisateur = auteur;
-                    //Promo promo = auteur.Promo_ID;
-                    //ViewBag.Promo = promo;
-
                     List<Post> postsTD = new List<Post>();
                     foreach ( Post post in posts)
                     {
@@ -186,6 +180,40 @@ namespace Front.Controllers
                     Console.WriteLine($"Error : '{e}'");
                     return View("~/Views/Home/ListerPost.cshtml");
                 }
+            }
+        }
+
+        public ActionResult AddLike(Post postToFind)
+        {
+            using (IDal dal = new Dal())
+            {
+                try
+                {
+                    dal.AddLike(postToFind);
+                    return ListerPost();
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine($"Error : '{e}'");
+                }
+                return View("~/Views/Home/Login.cshtml");
+            }
+        }
+
+        public ActionResult AddDislike(Post postToFind)
+        {
+            using (IDal dal = new Dal())
+            {
+                try
+                {
+                    dal.AddDislike(postToFind);
+                    return ListerPost();
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine($"Error : '{e}'");
+                }
+                return View("~/Views/Home/Login.cshtml");
             }
         }
 

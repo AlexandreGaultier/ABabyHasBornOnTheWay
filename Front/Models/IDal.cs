@@ -10,6 +10,8 @@ namespace Front.Models
         void CreerPost(string texte, Utilisateur utilisateur_id, DateTime date, int likes, int dislikes);
         List<Post> ObtientTousLesPosts();
         bool PostExiste(string texte);
+        void AddLike(Post postToFind);
+        void AddDislike(Post postToFind);
 
         int AjouterUtilisateur(string nom, string prenom, string email, string mdp, Promo promo_id);
         Utilisateur Authentifier(string nom, string mdp);
@@ -17,7 +19,5 @@ namespace Front.Models
         Promo ObtenirPromo(int id);
         Utilisateur ObtenirUtilisateur(string idStr);
         int ObtenirUtilisateurID(string nom, string mdp);
-
-        //A voir pour l'ajout de likes/dislikes
     }
 }

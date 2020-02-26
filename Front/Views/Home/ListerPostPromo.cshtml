@@ -4,6 +4,8 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
+<div class="row">
+
 @for (var i = 0; i <= @ViewBag.postsTDB1.Count - 1; i++)
 {
 
@@ -11,55 +13,63 @@
         <h4>"@ViewBag.postsTDB1[@i].Texte"</h4>
         <h5>@ViewBag.postsTDB1[@i].Utilisateur_ID.Nom @ViewBag.postsTDB1[@i].Utilisateur_ID.Prenom, @ViewBag.postsTDB1[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
         <p>Le : @ViewBag.postsTDB1[@i].Date</p>
-        <p>Likes : @ViewBag.postsTDB1[@i].Likes | Dislikes : @ViewBag.postsTDB1[@i].Dislikes</p>
-        <hr />
+        <p><a href="@Url.Action("AddLike", "Home", ViewBag.postsTDB1[@i])">Likes :</a> @ViewBag.postsTDB1[@i].Likes | <a href="@Url.Action("AddDislike", "Home", ViewBag.postsTDB1[@i])">Dislikes :</a> @ViewBag.postsTDB1[@i].Dislikes</p>
     </div>
 }
+</div><hr />
 
-@for (var i = 0; i <= @ViewBag.postsTDB2.Count - 1; i++)
-{
+<div class="row">
 
-    <div class="panel-group col-lg-3">
-        <h4>"@ViewBag.postsTDB2[@i].Texte"</h4>
-        <h5>@ViewBag.postsTDB2[@i].Utilisateur_ID.Nom @ViewBag.postsTDB2[@i].Utilisateur_ID.Prenom, @ViewBag.postsTDB2[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
-        <p>Le : @ViewBag.postsTDB2[@i].Date</p>
-        <p>Likes : @ViewBag.postsTDB2[@i].Likes | Dislikes : @ViewBag.postsTDB2[@i].Dislikes</p>
-        <hr />
-    </div>
-}
+    @for (var i = 0; i <= @ViewBag.postsTDB2.Count - 1; i++)
+    {
 
-@for (var i = 0; i <= @ViewBag.postsTDB3.Count - 1; i++)
-{
+        <div class="panel-group col-lg-3">
+            <h4>"@ViewBag.postsTDB2[@i].Texte"</h4>
+            <h5>@ViewBag.postsTDB2[@i].Utilisateur_ID.Nom @ViewBag.postsTDB2[@i].Utilisateur_ID.Prenom, @ViewBag.postsTDB2[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
+            <p>Le : @ViewBag.postsTDB2[@i].Date</p>
+            <p><a href="@Url.Action("AddLike", "Home", ViewBag.postsTDB2[@i])">Likes :</a> @ViewBag.postsTDB2[@i].Likes | <a href="@Url.Action("AddDislike", "Home", ViewBag.postsTDB2[@i])">Dislikes :</a> @ViewBag.postsTDB2[@i].Dislikes</p>
+        </div>
+    }
+</div><hr />
 
-    <div class="panel-group col-lg-3">
-        <h4>"@ViewBag.postsTDB3[@i].Texte"</h4>
-        <h5>@ViewBag.postsTDB3[@i].Utilisateur_ID.Nom @ViewBag.postsTDB3[@i].Utilisateur_ID.Prenom, @ViewBag.postsTDB3[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
-        <p>Le : @ViewBag.postsTDB3[@i].Date</p>
-        <p>Likes : @ViewBag.postsTDB3[@i].Likes | Dislikes : @ViewBag.postsTDB3[@i].Dislikes</p>
-        <hr />
-    </div>
-}
+<div class="row">
 
-@for (var i = 0; i <= @ViewBag.postsTDI4.Count - 1; i++)
-{
+    @for (var i = 0; i <= @ViewBag.postsTDB3.Count - 1; i++)
+    {
 
-    <div class="panel-group col-lg-3">
-        <h4>"@ViewBag.postsTDI4[@i].Texte"</h4>
-        <h5>@ViewBag.postsTDI4[@i].Utilisateur_ID.Nom @ViewBag.postsTDI4[@i].Utilisateur_ID.Prenom, @ViewBag.postsTDI4[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
-        <p>Le : @ViewBag.postsTDI4[@i].Date</p>
-        <p>Likes : @ViewBag.postsTDI4[@i].Likes | Dislikes : @ViewBag.postsTDI4[@i].Dislikes</p>
-        <hr />
-    </div>
-}
+        <div class="panel-group col-lg-3">
+            <h4>"@ViewBag.postsTDB3[@i].Texte"</h4>
+            <h5>@ViewBag.postsTDB3[@i].Utilisateur_ID.Nom @ViewBag.postsTDB3[@i].Utilisateur_ID.Prenom, @ViewBag.postsTDB3[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
+            <p>Le : @ViewBag.postsTDB3[@i].Date</p>
+            <p><a href="@Url.Action("AddLike", "Home", ViewBag.postsTDB3[@i])">Likes :</a> @ViewBag.postsTDB3[@i].Likes | <a href="@Url.Action("AddDislike", "Home", ViewBag.postsTDB3[@i])">Dislikes :</a> @ViewBag.postsTDB3[@i].Dislikes</p>
+        </div>
+    }
+</div><hr />
 
-@for (var i = 0; i <= @ViewBag.postsTDI5.Count - 1; i++)
-{
+<div class="row">
 
-    <div class="panel-group col-lg-3">
-        <h4>"@ViewBag.postsTDI5[@i].Texte"</h4>
-        <h5>@ViewBag.postsTDI5[@i].Utilisateur_ID.Nom @ViewBag.postsTDI5[@i].Utilisateur_ID.Prenom, @ViewBag.postsTDI5[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
-        <p>Le : @ViewBag.postsTDI5[@i].Date</p>
-        <p>Likes : @ViewBag.postsTDI5[@i].Likes | Dislikes : @ViewBag.postsTDI5[@i].Dislikes</p>
-        <hr />
-    </div>
-}
+    @for (var i = 0; i <= @ViewBag.postsTDI4.Count - 1; i++)
+    {
+
+        <div class="panel-group col-lg-3">
+            <h4>"@ViewBag.postsTDI4[@i].Texte"</h4>
+            <h5>@ViewBag.postsTDI4[@i].Utilisateur_ID.Nom @ViewBag.postsTDI4[@i].Utilisateur_ID.Prenom, @ViewBag.postsTDI4[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
+            <p>Le : @ViewBag.postsTDI4[@i].Date</p>
+            <p><a href="@Url.Action("AddLike", "Home", ViewBag.postsTDI4[@i])">Likes :</a> @ViewBag.postsTDI4[@i].Likes | <a href="@Url.Action("AddDislike", "Home", ViewBag.postsTDI4[@i])">Dislikes :</a> @ViewBag.postsTDI4[@i].Dislikes</p>
+        </div>
+    }
+</div><hr />
+
+<div class="row">
+
+    @for (var i = 0; i <= @ViewBag.postsTDI5.Count - 1; i++)
+    {
+
+        <div class="panel-group col-lg-3">
+            <h4>"@ViewBag.postsTDI5[@i].Texte"</h4>
+            <h5>@ViewBag.postsTDI5[@i].Utilisateur_ID.Nom @ViewBag.postsTDI5[@i].Utilisateur_ID.Prenom, @ViewBag.postsTDI5[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
+            <p>Le : @ViewBag.postsTDI5[@i].Date</p>
+            <p><a href="@Url.Action("AddLike", "Home", ViewBag.postsTDI5[@i])">Likes :</a> @ViewBag.postsTDI5[@i].Likes | <a href="@Url.Action("AddDislike", "Home", ViewBag.postsTDI5[@i])">Dislikes :</a> @ViewBag.postsTDI5[@i].Dislikes</p>
+        </div>
+    }
+</div><hr />

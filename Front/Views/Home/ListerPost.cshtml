@@ -23,13 +23,13 @@
 @for (var i = 0; i <= @ViewBag.postsTD.Count -1; i++)
 {
 
-    <div class="panel-group col-lg-3">
-        <h4>"@ViewBag.postsTD[@i].Texte"</h4>
-        <h5>@ViewBag.postsTD[@i].Utilisateur_ID.Nom @ViewBag.postsTD[@i].Utilisateur_ID.Prenom, @ViewBag.postsTD[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
-        <p>Le : @ViewBag.postsTD[@i].Date</p>
-        <p>Likes : @ViewBag.postsTD[@i].Likes | Dislikes : @ViewBag.postsTD[@i].Dislikes</p>
-        <hr />
-    </div>
+<div class="panel-group col-lg-3">
+    <h4>"@ViewBag.postsTD[@i].Texte"</h4>
+    <h5>@ViewBag.postsTD[@i].Utilisateur_ID.Nom @ViewBag.postsTD[@i].Utilisateur_ID.Prenom, @ViewBag.postsTD[@i].Utilisateur_ID.Promo_ID.Libelle</h5>
+    <p>Le : @ViewBag.postsTD[@i].Date</p>
+    <p><a href="@Url.Action("AddLike", "Home", ViewBag.postsTD[@i])">Likes :</a> @ViewBag.postsTD[@i].Likes | <a href="@Url.Action("AddDislike", "Home", ViewBag.postsTD[@i])">Dislikes :</a> @ViewBag.postsTD[@i].Dislikes</p>
+    <hr />
+</div>
 }
 
 @*@foreach (var post in @ViewBag.posts)

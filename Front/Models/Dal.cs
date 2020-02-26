@@ -91,6 +91,20 @@ namespace Front.Models
         {
             return bdd.Posts.Any(p => string.Compare(p.Texte, texte, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
+
+        public void AddLike(Post postToFind)
+        {
+            Post post = bdd.Posts.First(p => p.ID == postToFind.ID);
+            post.Likes = post.Likes + 1;
+            bdd.SaveChanges();
+        }
+
+        public void AddDislike(Post postToFind)
+        {
+            Post post = bdd.Posts.First(p => p.ID == postToFind.ID);
+            post.Dislikes = post.Dislikes + 1;
+            bdd.SaveChanges();
+        }
         #endregion
 
 
