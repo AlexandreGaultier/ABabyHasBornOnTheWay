@@ -101,7 +101,7 @@ namespace Front.Controllers
                     //On récupère tout les posts en base + l'utilisateur pour les afficher
                     using (var context = new ContexteBDD())
                     {
-                        var b1_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B1")/*.OrderBy(p => p.Likes)*/;
+                        var b1_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B1").OrderBy(p => p.Likes);
                         IQueryable<Post> postsb1 = b1_posts;
                         
                         List<Post> postsTDb1 = new List<Post>(); //liste à afficher
@@ -115,7 +115,7 @@ namespace Front.Controllers
                         }
                         ViewBag.postsTDB1 = postsTDb1;
 
-                        var b2_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B2");
+                        var b2_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B2").OrderBy(p => p.Likes);
                         IQueryable<Post> postsb2 = b2_posts;
 
                         List<Post> postsTDb2 = new List<Post>(); //liste à afficher
@@ -129,7 +129,7 @@ namespace Front.Controllers
                         }
                         ViewBag.postsTDB2 = postsTDb2;
 
-                        var b3_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B3");
+                        var b3_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "B3").OrderBy(p => p.Likes);
                         IQueryable<Post> postsb3 = b3_posts;
 
                         List<Post> postsTDb3 = new List<Post>(); //liste à afficher
@@ -143,7 +143,7 @@ namespace Front.Controllers
                         }
                         ViewBag.postsTDB3 = postsTDb3;
 
-                        var i4_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "I4");
+                        var i4_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "I4").OrderBy(p => p.Likes);
                         IQueryable<Post> postsi4 = i4_posts;
 
                         List<Post> postsTDi4 = new List<Post>(); //liste à afficher
@@ -157,7 +157,7 @@ namespace Front.Controllers
                         }
                         ViewBag.postsTDI4 = postsTDi4;
 
-                        var i5_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "I5");
+                        var i5_posts = context.Posts.Where(p => p.Utilisateur_ID.Promo_ID.Libelle == "I5").OrderBy(p => p.Likes);
                         IQueryable<Post> postsi5 = i5_posts;
 
                         List<Post> postsTDi5 = new List<Post>(); //liste à afficher
@@ -190,7 +190,7 @@ namespace Front.Controllers
                 try
                 {
                     dal.AddLike(postToFind);
-                    return ListerPost();
+                    return ListerPostPromo();
                 }
                 catch (IOException e)
                 {
@@ -207,7 +207,7 @@ namespace Front.Controllers
                 try
                 {
                     dal.AddDislike(postToFind);
-                    return ListerPost();
+                    return ListerPostPromo();
                 }
                 catch (IOException e)
                 {
